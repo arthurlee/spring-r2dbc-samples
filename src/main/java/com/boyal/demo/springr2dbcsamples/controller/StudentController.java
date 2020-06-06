@@ -21,4 +21,6 @@ public class StudentController {
 	public Flux<Student> index() {
 		return studentRepository.findAll();
 	}
+
+
 }

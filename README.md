@@ -10,11 +10,12 @@ Some examples for basic usage for Spirng r2dbc.
 - lombok
 
 # Project Structures
-- config: configuration for Spring Boot and Spring Data
-- controller: controller classes
-- entity: database table mapping
-- repository: derived from ReactiveCrudRepository
-- service: service layer
+- project root
+  - config: configuration for Spring Boot and Spring Data
+  - controller: controller classes
+  - entity: database table mapping
+  - repository: derived from ReactiveCrudRepository
+  - service: service layer
 
 # Features
 - Runnable example for WebFlux and Reactive MySQL

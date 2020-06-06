@@ -14,12 +14,15 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/students")
 public class StudentController {
 
+	// Spring recommend final and passed in constructor
 	private final StudentService studentService;
 
 	public StudentController(StudentService studentService) {
 		this.studentService = studentService;
 	}
 
+	// can be visited by /api/students or /api/students/
+	// @GetMapping("/") can only be visited via /api/students/
 	@GetMapping("")
 	public Flux<Student> index() {
 		return studentService.findAll();

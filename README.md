@@ -9,6 +9,9 @@ Some examples for basic usage for Spirng r2dbc.
 - r2dbc mysql
 - lombok
 
+# Requirements
+- jdk 13 / 14 with text block support (you can discard it by modify the @Query annotation in the repository classes)
+
 # Project Structures
 - project root
   - config: configuration for Spring Boot and Spring Data

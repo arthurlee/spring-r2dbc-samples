@@ -11,6 +11,10 @@ spring:
 logging:
   level:
     web: debug
+    org:
+      springframework:
+        data:
+          r2dbc: debug
     com:
       boyal:
         demo:

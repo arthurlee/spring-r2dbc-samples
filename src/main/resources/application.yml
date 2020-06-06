@@ -1,0 +1,12 @@
+
+server:
+  port: 8080
+
+spring:
+  r2dbc:
+    url: r2dbcs:mysql://localhost:3306/spring_r2dbc_samples?sslMode=DISABLED
+    username: spring_r2dbc_samples_user
+    password: B55!3Ufhj
+logging:
+  level:
+    web: debug

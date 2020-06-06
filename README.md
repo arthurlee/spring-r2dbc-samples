@@ -10,7 +10,7 @@ Some examples for basic usage for Spirng r2dbc.
 - lombok
 
 # Requirements
-- jdk 13 / 14 with text block support (you can discard it by modify the @Query annotation in the repository classes)
+- jdk 8 or above
 
 # Project Structures
 - project root

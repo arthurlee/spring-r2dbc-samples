@@ -38,6 +38,7 @@ public class StudentController {
 		, @Validated ModifyReq req
 	) {
 		return studentRepository.findByCodeAndActiveTrue(code)
+			.switchIfEmpty(Mono.error(new IllegalArgumentException("invalid code")))
 			.zipWhen(student -> {
 					if (!StringUtils.isEmpty(req.address) || !StringUtils.isEmpty(req.remark)) {
 						if (!StringUtils.isEmpty(req.address)) {
@@ -50,7 +51,7 @@ public class StudentController {
 
 						return studentRepository.save(student);
 					} else {
-						return Mono.just(student);
+						return Mono.error(new IllegalArgumentException("invalid parameters"));
 					}
 				},
 				(student, studentSaved) -> studentSaved

@@ -2,9 +2,8 @@ package com.boyal.demo.springr2dbcsamples.controller;
 
 import com.boyal.demo.springr2dbcsamples.controller.Result.ResultBase;
 import com.boyal.demo.springr2dbcsamples.entity.Student;
-import com.boyal.demo.springr2dbcsamples.repository.StudentRepository;
+import com.boyal.demo.springr2dbcsamples.service.StudentService;
 import lombok.Data;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -15,15 +14,15 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/students")
 public class StudentController {
 
-	private final StudentRepository studentRepository;
+	private final StudentService studentService;
 
-	public StudentController(StudentRepository studentRepository) {
-		this.studentRepository = studentRepository;
+	public StudentController(StudentService studentService) {
+		this.studentService = studentService;
 	}
 
 	@GetMapping("")
 	public Flux<Student> index() {
-		return studentRepository.findAll();
+		return studentService.findAll();
 	}
 
 	@Data
@@ -37,23 +36,8 @@ public class StudentController {
 		  @PathVariable("code") String code
 		, @Validated ModifyReq req
 	) {
-		return studentRepository.findByCodeAndActiveTrue(code)
-			.switchIfEmpty(Mono.error(new IllegalArgumentException("invalid code")))
-			.zipWhen(student -> {
-					if (!StringUtils.isEmpty(req.address) || !StringUtils.isEmpty(req.remark)) {
-						if (!StringUtils.isEmpty(req.address)) {
-							student.setAddress(req.address);
-						}
-
-						if (!StringUtils.isEmpty(req.remark)) {
-							student.setRemark(req.remark);
-						}
-
-						return studentRepository.save(student);
-					} else {
-						return Mono.error(new IllegalArgumentException("invalid parameters"));
-					}
-				},
+		return studentService.findStudentByCode(code)
+			.zipWhen(student -> studentService.updateStudentProfile(student, req.address, req.remark),
 				(student, studentSaved) -> studentSaved
 			)
 			.map(student -> ResultBase.OK())

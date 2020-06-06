@@ -11,3 +11,7 @@ spring:
 logging:
   level:
     web: debug
+    com:
+      boyal:
+        demo:
+          springr2dbcsamples: debug

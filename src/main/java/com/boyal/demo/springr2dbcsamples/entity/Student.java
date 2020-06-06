@@ -21,16 +21,10 @@ public class Student {
 	private String remark;
 	private boolean active;
 
-	@Column("createdAt")
 	private LocalDateTime createdAt;
-
 	//	@CreatedBy
-	@Column("createdBy")
 	private String createdBy;
 
-	@Column("updatedAt")
 	private LocalDateTime updatedAt;
-
-	@Column("updatedBy")
 	private String updatedBy;
 }

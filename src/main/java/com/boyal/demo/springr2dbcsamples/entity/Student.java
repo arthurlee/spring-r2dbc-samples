@@ -10,6 +10,7 @@ import java.time.LocalDate;
 public class Student extends EntityBase {
 	private String code;
 	private String name;
+	private String gender;
 	private LocalDate birthday;
 	private String address;
 }
